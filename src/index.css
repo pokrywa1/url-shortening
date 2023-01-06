@@ -17,3 +17,10 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
 }
+
+button {
+  background-color: var(--color-primary-cyan);
+}
+button:hover {
+  background-color: var(--color-neutral-gray);
+}

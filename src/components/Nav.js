@@ -15,11 +15,15 @@ const Nav = () => {
         <FiMenu></FiMenu>
       </BarIconStyles>
       <ListStyles show={showBar}>
-        <li>Features</li>
-        <li>Pricing</li>
-        <li>Resources</li>
-        <li>Login</li>
-        <li>Sign Up</li>
+        <div>
+          <li>Features</li>
+          <li>Pricing</li>
+          <li>Resources</li>
+        </div>
+        <LoginButtonStyles>
+          <li>Login</li>
+          <li>Sign Up</li>
+        </LoginButtonStyles>
       </ListStyles>
     </NavStyles>
   );
@@ -31,15 +35,38 @@ const NavStyles = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  padding: 1rem;
   position: relative;
   z-index: 2;
+  @media only screen and (min-width: 768px) {
+    max-width: 1440px;
+    margin: 0 auto;
+    img {
+      display: block;
+    }
+  }
 `;
+
 const BarIconStyles = styled.div`
   font-size: 1.75rem;
   transition: 0.4;
   color: ${({ show }) =>
     show ? 'var(--color-neutral-grayish-violet)' : 'black'};
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+`;
+const LoginButtonStyles = styled.div`
+  li:last-child {
+    border-radius: 25px;
+    background-color: var(--color-primary-cyan);
+    color: white;
+    transition: 0.4s;
+  }
+  li:last-child:hover {
+    background-color: var(--color-neutral-grayish-violet);
+    color: white;
+  }
 `;
 
 const ListStyles = styled.ul`
@@ -61,10 +88,7 @@ const ListStyles = styled.ul`
     padding: 1rem;
     cursor: pointer;
   }
-  li:last-child {
-    border-radius: 25px;
-    background-color: var(--color-primary-cyan);
-  }
+
   li:nth-child(3) {
     position: relative;
     margin-bottom: 2rem;
@@ -78,5 +102,34 @@ const ListStyles = styled.ul`
     height: 0.5em;
 
     border-top: 0.5px solid var(--color-neutral-grayish-violet);
+  }
+
+  @media only screen and (min-width: 768px) {
+    position: static;
+    transform: none;
+    background: none;
+    color: var(--color-neutral-grayish-violet);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    width: 100%;
+    li {
+      transition: all 0.4s;
+    }
+    li:hover {
+      color: var(--color-primary-dark-violet);
+    }
+    li:nth-child(3) {
+      position: static;
+      margin-bottom: 0;
+    }
+    li:nth-child(3):after {
+      display: none;
+    }
+    div {
+      display: flex;
+      margin-left: 1.25rem;
+    }
   }
 `;
