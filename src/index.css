@@ -20,7 +20,12 @@ body {
 
 button {
   background-color: var(--color-primary-cyan);
+  transition: 0.4s;
 }
 button:hover {
   background-color: var(--color-neutral-gray);
+}
+
+img {
+  display: block;
 }

@@ -32,9 +32,9 @@ const HeaderStyles = styled.header`
     grid-template-areas: 'left right';
     max-width: 1440px;
     margin: 0 auto;
-  }
-  @media only screen and (min-width: 768px) {
-    overflow: visible;
+    /* @media only screen and (min-width: 1440px) {
+      overflow: visible;
+    } */
   }
 `;
 
