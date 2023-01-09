@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LinksList from './LinksList';
+import Statistics from './Statistics';
 import formBackground from '../images/bg-shorten-mobile.svg';
 import formBackgroundDesktop from '../images/bg-shorten-desktop.svg';
 
@@ -22,6 +23,7 @@ const Main = () => {
         </FormStyles>
         <LinksList></LinksList>
       </FormAppStyles>
+      <Statistics></Statistics>
     </MainStyles>
   );
 };
@@ -31,6 +33,7 @@ export default Main;
 const MainStyles = styled.main`
   background-color: #eef1f6;
   margin-top: 3rem;
+  padding-bottom: 3rem;
 `;
 
 const FormAppStyles = styled.section`

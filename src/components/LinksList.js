@@ -28,8 +28,9 @@ const LinkInfoStyles = styled.div`
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.5rem;
+
   p {
-    font-size: 20px;
+    font-size: 16px;
   }
   p:nth-child(1) {
     color: var(--color-neutral-very-dark-blue);
