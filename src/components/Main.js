@@ -34,6 +34,9 @@ const MainStyles = styled.main`
   background-color: #eef1f6;
   margin-top: 3rem;
   padding-bottom: 3rem;
+  @media only screen and (min-width: 768px) {
+    padding-bottom: 7rem;
+  }
 `;
 
 const FormAppStyles = styled.section`

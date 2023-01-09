@@ -51,6 +51,9 @@ const Statistics = () => {
 export default Statistics;
 
 const StatisticsSectionStyles = styled.section`
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 1rem;
   h2 {
     font-size: 24px;
@@ -90,12 +93,67 @@ const StatisticDescStyles = styled.div`
     transform: translate(-50%);
     background-color: var(--color-primary-cyan);
   }
+  :nth-child(2) {
+    @media only screen and (min-width: 768px) {
+      transform: translateY(2rem);
+    }
+  }
+  :nth-child(3) {
+    @media only screen and (min-width: 768px) {
+      transform: translateY(4rem);
+    }
+  }
+  /* @media only screen and (min-width: 768px) {
+    max-width: none;
+    :nth-child(1)::after,
+    :nth-child(2)::after {
+      content: '';
+      position: absolute;
+      width: 3rem;
+      height: 8px;
+
+      left: calc(100% + 1.5rem);
+      bottom: 50%;
+
+      background-color: var(--color-primary-cyan);
+    }
+  } */
+  @media only screen and (min-width: 768px) {
+    max-width: none;
+    :nth-child(1)::after {
+      content: '';
+      position: absolute;
+      width: 3rem;
+      height: 8px;
+
+      left: calc(100% + 1.5rem);
+      bottom: calc(50% - 2rem);
+
+      background-color: var(--color-primary-cyan);
+    }
+    :nth-child(2)::after {
+      content: '';
+      position: absolute;
+      width: 3rem;
+      height: 8px;
+
+      left: calc(100% + 1.5rem);
+      bottom: 50%;
+
+      background-color: var(--color-primary-cyan);
+    }
+  }
 `;
 
 const StatisticsListStyles = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const StatisticImg = styled.div`

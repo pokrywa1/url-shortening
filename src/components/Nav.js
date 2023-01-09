@@ -36,6 +36,7 @@ const NavStyles = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+
   position: relative;
   z-index: 2;
   @media only screen and (min-width: 768px) {
@@ -82,6 +83,7 @@ const ListStyles = styled.ul`
 
   text-align: center;
   padding: 1.5rem;
+  margin: 0 1rem;
   list-style-type: none;
   border-radius: 25px;
   li {
