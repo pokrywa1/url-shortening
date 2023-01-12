@@ -4,8 +4,8 @@ import formBackground from '../images/bg-shorten-mobile.svg';
 import formBackgroundDesktop from '../images/bg-shorten-desktop.svg';
 
 const LinkForm = props => {
-  const [valid, setValid] = useState(false);
   const linkRef = useRef(undefined);
+  const [valid, setValid] = useState(true);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -23,6 +23,7 @@ const LinkForm = props => {
           shortedLink: data?.result.short_link3,
         };
         props.getLinkListHandle(linkObj);
+        setValid(true);
       })
       .catch(err => {
         setValid(false);
@@ -30,7 +31,7 @@ const LinkForm = props => {
   };
 
   return (
-    <FormStyles>
+    <FormStyles valid={valid}>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -38,9 +39,12 @@ const LinkForm = props => {
           placeholder="Shorten link here"
           ref={linkRef}
         />
+        {!valid && <ErrorStyles>Please add a valid link</ErrorStyles>}
         <button type="submit">Shorten It</button>
+
         {/* <input type="submit" value="Shorten It!" /> */}
       </form>
+
       <BackgroundMobileStyles>
         <img src={formBackground} />
       </BackgroundMobileStyles>
@@ -75,6 +79,18 @@ const FormStyles = styled.div`
     input[type='text'] {
       padding: 12px 24px;
       font-size: 16px;
+
+      border-color: ${props =>
+        !props.valid ? 'var(--color-secondary-red)' : '#ccc'};
+    }
+    input[type='text']::placeholder {
+      color: ${props => (!props.valid ? 'var(--color-secondary-red)' : '#ccc')};
+    }
+    input[type='text']:focus {
+      outline-color: ${props =>
+        !props.valid
+          ? 'var(--color-secondary-red)'
+          : 'var(--color-primary-cyan)'};
     }
     button {
       background-color: var(--color-primary-cyan);
@@ -108,6 +124,10 @@ const FormStyles = styled.div`
       font-size: 16px;
     }
   }
+`;
+
+const ErrorStyles = styled.span`
+  color: var(--color-secondary-red);
 `;
 
 const BackgroundMobileStyles = styled.div`

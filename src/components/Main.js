@@ -6,10 +6,12 @@ import LinkForm from './LinkForm';
 
 const Main = () => {
   const [links, setLinks] = useState([]);
+
   const getLinkListHandle = link => {
     setLinks(prev => [...prev, link]);
     console.log(links);
   };
+
   return (
     <MainStyles>
       <FormAppStyles>
