@@ -65,8 +65,11 @@ const FormStyles = styled.div`
 
   background-color: var(--color-primary-dark-violet);
   form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+      'input'
+      'valid'
+      'button';
     padding: 2rem;
     gap: 1.25rem;
 
@@ -76,7 +79,12 @@ const FormStyles = styled.div`
       border-radius: 4px;
     }
 
+    button {
+      grid-area: button;
+    }
+
     input[type='text'] {
+      grid-area: input;
       padding: 12px 24px;
       font-size: 16px;
 
@@ -109,17 +117,20 @@ const FormStyles = styled.div`
   }
   @media only screen and (min-width: 768px) {
     form {
-      flex-direction: row;
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas:
+        'input button'
+        'valid valid';
       gap: 1rem;
       justify-content: center;
     }
     input[type='text'] {
-      width: 70%;
+      width: 100%;
       padding: 13px 26px;
       font-size: 16px;
     }
     input[type='submit'] {
-      width: 30%;
+      width: 100%;
       padding: 13px 26px;
       font-size: 16px;
     }
@@ -127,6 +138,7 @@ const FormStyles = styled.div`
 `;
 
 const ErrorStyles = styled.span`
+  grid-area: valid;
   color: var(--color-secondary-red);
 `;
 
