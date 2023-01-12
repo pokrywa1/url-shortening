@@ -5,16 +5,16 @@ import Statistics from './Statistics';
 import LinkForm from './LinkForm';
 
 const Main = () => {
-  const [link, setList] = useState();
+  const [links, setLinks] = useState([]);
   const getLinkListHandle = link => {
-    setList(link);
-    console.log(link);
+    setLinks(prev => [...prev, link]);
+    console.log(links);
   };
   return (
     <MainStyles>
       <FormAppStyles>
         <LinkForm getLinkListHandle={getLinkListHandle}></LinkForm>
-        <LinksList link={link}></LinksList>
+        <LinksList link={links}></LinksList>
       </FormAppStyles>
       <Statistics></Statistics>
     </MainStyles>

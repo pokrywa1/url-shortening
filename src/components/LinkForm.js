@@ -4,19 +4,17 @@ import formBackground from '../images/bg-shorten-mobile.svg';
 import formBackgroundDesktop from '../images/bg-shorten-desktop.svg';
 
 const LinkForm = props => {
-  const [link, setLink] = useState('');
   const [valid, setValid] = useState(false);
   const linkRef = useRef(undefined);
 
   const handleSubmit = event => {
     event.preventDefault();
-    const tLink = linkRef.current.value;
-    setLink(tLink);
+    const link = linkRef.current.value;
+    getLinkFromApi(link);
     event.target.reset();
   };
 
-  useEffect(() => {
-    if (!link) return;
+  const getLinkFromApi = link => {
     fetch(`https://api.shrtco.de/v2/shorten?url=${link}`)
       .then(response => response.json())
       .then(data => {
@@ -29,7 +27,7 @@ const LinkForm = props => {
       .catch(err => {
         setValid(false);
       });
-  }, [link]);
+  };
 
   return (
     <FormStyles>

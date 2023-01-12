@@ -4,23 +4,22 @@ import styled from 'styled-components';
 const LinksList = ({ link }) => {
   const [links, setLinks] = useState([]);
 
-  useEffect(() => {
-    if (!link) return;
-    setLinks(prev => [...prev, link]);
-    console.log(links);
-  }, [link]);
+  // useEffect(() => {
+  //   if (!link) return;
+  //   setLinks(prev => [...prev, link]);
+  //   console.log(links);
+  // }, [link]);
 
   return (
     <Fragment>
-      {links &&
-        links.map(item => (
-          <LinkInfoStyles key={item.shortedLink}>
-            <p>{item.link}</p>
-            <p>{item.shortedLink}</p>
+      {link.map(item => (
+        <LinkInfoStyles key={item.shortedLink}>
+          <p>{item.link}</p>
+          <p>{item.shortedLink}</p>
 
-            <button>Copy</button>
-          </LinkInfoStyles>
-        ))}
+          <button>Copy</button>
+        </LinkInfoStyles>
+      ))}
       {/* <LinkInfoStyles>
         <p>https://www.facebook.com/</p>
         <p>https://bit.ly/3CyqPo5</p>
