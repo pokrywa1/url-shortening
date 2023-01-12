@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import formBackground from '../images/bg-shorten-mobile.svg';
 import formBackgroundDesktop from '../images/bg-shorten-desktop.svg';
 
-const LinkForm = () => {
+const LinkForm = props => {
   const [link, setLink] = useState('');
+  const [valid, setValid] = useState(false);
   const linkRef = useRef(undefined);
 
   const handleSubmit = event => {
@@ -15,11 +16,18 @@ const LinkForm = () => {
   };
 
   useEffect(() => {
+    if (!link) return;
     fetch(`https://api.shrtco.de/v2/shorten?url=${link}`)
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        const linkObj = {
+          link: link,
+          shortedLink: data?.result.short_link3,
+        };
+        props.getLinkListHandle(linkObj);
+      })
       .catch(err => {
-        console.log(err);
+        setValid(false);
       });
   }, [link]);
 

@@ -1,10 +1,27 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const LinksList = () => {
+const LinksList = ({ link }) => {
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    if (!link) return;
+    setLinks(prev => [...prev, link]);
+    console.log(links);
+  }, [link]);
+
   return (
     <Fragment>
-      <LinkInfoStyles>
+      {links &&
+        links.map(item => (
+          <LinkInfoStyles key={item.shortedLink}>
+            <p>{item.link}</p>
+            <p>{item.shortedLink}</p>
+
+            <button>Copy</button>
+          </LinkInfoStyles>
+        ))}
+      {/* <LinkInfoStyles>
         <p>https://www.facebook.com/</p>
         <p>https://bit.ly/3CyqPo5</p>
         <button>Copy</button>
@@ -13,7 +30,7 @@ const LinksList = () => {
         <p>https://www.facebook.com/</p>
         <p>https://bit.ly/3CyqPo5</p>
         <button>Copy</button>
-      </LinkInfoStyles>
+      </LinkInfoStyles> */}
     </Fragment>
   );
 };

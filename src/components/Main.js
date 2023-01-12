@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import LinksList from './LinksList';
 import Statistics from './Statistics';
 import LinkForm from './LinkForm';
 
 const Main = () => {
+  const [link, setList] = useState();
+  const getLinkListHandle = link => {
+    setList(link);
+    console.log(link);
+  };
   return (
     <MainStyles>
       <FormAppStyles>
-        <LinkForm></LinkForm>
-        <LinksList></LinksList>
+        <LinkForm getLinkListHandle={getLinkListHandle}></LinkForm>
+        <LinksList link={link}></LinksList>
       </FormAppStyles>
       <Statistics></Statistics>
     </MainStyles>
