@@ -1,35 +1,26 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import ClipboardCopy from './ClipboardCopy';
 
 const LinksList = ({ link }) => {
-  const [links, setLinks] = useState([]);
-
-  // useEffect(() => {
-  //   if (!link) return;
-  //   setLinks(prev => [...prev, link]);
-  //   console.log(links);
-  // }, [link]);
+  const [isCopied, setIsCopied] = useState(false);
 
   return (
     <Fragment>
       {link.map(item => (
-        <LinkInfoStyles key={item.shortedLink}>
+        <LinkInfoStyles key={item.shortedLink} isCopied={isCopied}>
           <p>{item.link}</p>
           <p>{item.shortedLink}</p>
-
-          <button>Copy</button>
+          <ClipboardCopy link={item.shortedLink}></ClipboardCopy>
+          {/* <button
+            onClick={() => {
+              handleCopyClick(item.shortedLink);
+            }}
+          >
+            {isCopied ? 'Copied!' : 'Copy'}
+          </button> */}
         </LinkInfoStyles>
       ))}
-      {/* <LinkInfoStyles>
-        <p>https://www.facebook.com/</p>
-        <p>https://bit.ly/3CyqPo5</p>
-        <button>Copy</button>
-      </LinkInfoStyles>
-      <LinkInfoStyles>
-        <p>https://www.facebook.com/</p>
-        <p>https://bit.ly/3CyqPo5</p>
-        <button>Copy</button>
-      </LinkInfoStyles> */}
     </Fragment>
   );
 };
@@ -63,14 +54,5 @@ const LinkInfoStyles = styled.div`
   }
   p:nth-child(2) {
     color: var(--color-primary-cyan);
-  }
-  button {
-    color: white;
-    border: none;
-    font-size: 22px;
-    font-weight: bold;
-    border-radius: 4px;
-    padding: 13px 26px;
-    width: 100%;
   }
 `;
