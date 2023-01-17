@@ -30,3 +30,7 @@ button:hover {
 img {
   display: block;
 }
+a {
+  color: inherit;
+  text-decoration: inherit;
+}

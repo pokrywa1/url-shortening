@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
 import logo from '../images/logo.svg';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   const [showBar, setShowBar] = useState(false);
@@ -21,7 +22,10 @@ const Nav = () => {
           <li>Resources</li>
         </div>
         <LoginButtonStyles>
-          <li>Login</li>
+          <li>
+            <Link to={'/login'}>Login</Link>
+          </li>
+
           <li>Sign Up</li>
         </LoginButtonStyles>
       </ListStyles>
