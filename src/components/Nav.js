@@ -6,10 +6,19 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
+import { FiLogOut } from 'react-icons/fi';
 
 const Nav = () => {
   const [showBar, setShowBar] = useState(false);
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
+
+  const logoutHandler = async () => {
+    try {
+      await logout();
+    } catch {
+      alert('Cannot logout now');
+    }
+  };
 
   return (
     <NavStyles>
@@ -26,7 +35,16 @@ const Nav = () => {
           <li>Resources</li>
         </div>
 
-        {currentUser && <span>Hello, {currentUser.email}</span>}
+        {currentUser && (
+          <WelcomeUserStyles>
+            <span>{currentUser && currentUser.email}</span>
+            <div onClick={logoutHandler}>
+              <FiLogOut></FiLogOut>
+              <span>Log Out</span>
+            </div>
+          </WelcomeUserStyles>
+        )}
+
         {!currentUser && (
           <LoginButtonStyles>
             <li>
@@ -146,6 +164,33 @@ const ListStyles = styled.ul`
     div {
       display: flex;
       margin-left: 1.25rem;
+    }
+  }
+`;
+
+const WelcomeUserStyles = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  svg {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+  }
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    div:hover {
+      color: var(--color-neutral-very-dark-violet);
     }
   }
 `;

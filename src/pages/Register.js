@@ -12,9 +12,15 @@ const Login = () => {
   const [error, setError] = useState(undefined);
   const navigate = useNavigate();
 
+  const resetPasswordForm = () => {
+    passwordRef.current.value = '';
+    passwordConfirmRef.current.value = '';
+  };
+
   const signupHandler = async e => {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      resetPasswordForm();
       return setError('Passwords do not match');
     }
     try {
@@ -23,6 +29,7 @@ const Login = () => {
       navigate('/');
     } catch {
       setError('Failed to create an account');
+      resetPasswordForm();
     }
   };
 
@@ -30,6 +37,11 @@ const Login = () => {
     <WrapStyles>
       <FormContainerStyles>
         <h1>Login</h1>
+        {error && (
+          <ErrorStyles>
+            <p>{error}</p>
+          </ErrorStyles>
+        )}
         <form>
           <input type="text" placeholder="e-mail" ref={emailRef} />
           <input type="password" placeholder="password" ref={passwordRef} />
@@ -117,4 +129,12 @@ const FormContainerStyles = styled.div`
     font-size: 16px;
     color: var(--color-neutral-grayish-violet);
   }
+`;
+
+const ErrorStyles = styled.div`
+  background-color: var(--color-secondary-red);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 1rem;
 `;

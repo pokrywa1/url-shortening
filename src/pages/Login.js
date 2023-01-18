@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import backgroundMobile from '../images/bg-shorten-mobile.svg';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ const Login = () => {
   const { login } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [error, setError] = useState(undefined);
 
   const loginHandler = async e => {
     e.preventDefault();
@@ -17,7 +18,9 @@ const Login = () => {
       await login(emailRef.current.value, passwordRef.current.value);
       navigate('/');
     } catch {
-      console.log('error');
+      setError('Invalid e-mail or password');
+      emailRef.current.value = '';
+      passwordRef.current.value = '';
     }
   };
 
@@ -25,6 +28,11 @@ const Login = () => {
     <WrapStyles>
       <FormContainerStyles>
         <h1>Login</h1>
+        {error && (
+          <ErrorStyles>
+            <p>{error}</p>
+          </ErrorStyles>
+        )}
         <form>
           <input type="text" placeholder="e-mail" ref={emailRef} />
           <input type="password" placeholder="password" ref={passwordRef} />
@@ -110,4 +118,12 @@ const FormContainerStyles = styled.div`
     font-size: 16px;
     color: var(--color-neutral-grayish-violet);
   }
+`;
+
+const ErrorStyles = styled.div`
+  background-color: var(--color-secondary-red);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 1rem;
 `;
