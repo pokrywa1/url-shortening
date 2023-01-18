@@ -8,6 +8,11 @@ A Shortly app which was aplacation inspired by frontedmentor. Shortly allows you
 
 Demo [https://shortlyph.netlify.app/](https://shortlyph.netlify.app/)
 
+## What is in progress:
+-Add database
+-Posibility to browse a history
+-Remove data from localstorage
+
 ## How to Install and Run the Project
 
 Download project create .env.local in root folder and complete the file based on the data from the firebase account
