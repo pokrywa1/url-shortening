@@ -9,9 +9,9 @@ A Shortly app which was aplacation inspired by frontedmentor. Shortly allows you
 Demo [https://shortlyph.netlify.app/](https://shortlyph.netlify.app/)
 
 ## What is in progress:
--Add database
--Posibility to browse a history
--Remove data from localstorage
+-Add database </br>
+-Posibility to browse a history </br>
+-Remove data from localstorage </br>
 
 ## How to Install and Run the Project
 
