@@ -8,6 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import { useEffect } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 
+
 const Nav = () => {
   const [showBar, setShowBar] = useState(false);
   const { currentUser, logout } = useAuth();
