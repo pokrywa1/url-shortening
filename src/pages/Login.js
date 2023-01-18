@@ -1,19 +1,42 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import backgroundMobile from '../images/bg-shorten-mobile.svg';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const loginHandler = async e => {
+    e.preventDefault();
+    try {
+      await login(emailRef.current.value, passwordRef.current.value);
+      navigate('/');
+    } catch {
+      console.log('error');
+    }
+  };
+
   return (
     <WrapStyles>
       <FormContainerStyles>
         <h1>Login</h1>
         <form>
-          <input type="text" placeholder="e-mail" />
-          <input type="password" placeholder="password" />
-          <button>Login</button>
+          <input type="text" placeholder="e-mail" ref={emailRef} />
+          <input type="password" placeholder="password" ref={passwordRef} />
+          <button onClick={loginHandler}>Login</button>
         </form>
-        <span>Don't have an account?</span>
-        <span>Forgot password?</span>
+        <span>
+          <Link to={'/register'}>Don't have an account?</Link>
+        </span>
+        {/***! change it later***/}
+        <span>
+          <Link to={'/login'}>Forgot password?</Link>
+        </span>
         <BackgroundStyles>
           <img src={backgroundMobile} />
         </BackgroundStyles>

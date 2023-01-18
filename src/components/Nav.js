@@ -4,9 +4,13 @@ import { FiMenu } from 'react-icons/fi';
 import logo from '../images/logo.svg';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useEffect } from 'react';
 
 const Nav = () => {
   const [showBar, setShowBar] = useState(false);
+  const { currentUser } = useAuth();
+
   return (
     <NavStyles>
       <div>
@@ -21,13 +25,19 @@ const Nav = () => {
           <li>Pricing</li>
           <li>Resources</li>
         </div>
-        <LoginButtonStyles>
-          <li>
-            <Link to={'/login'}>Login</Link>
-          </li>
 
-          <li>Sign Up</li>
-        </LoginButtonStyles>
+        {currentUser && <span>Hello, {currentUser.email}</span>}
+        {!currentUser && (
+          <LoginButtonStyles>
+            <li>
+              <Link to={'/login'}>Login</Link>
+            </li>
+
+            <li>
+              <Link to={'/register'}>Signup</Link>
+            </li>
+          </LoginButtonStyles>
+        )}
       </ListStyles>
     </NavStyles>
   );

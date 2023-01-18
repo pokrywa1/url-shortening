@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import backgroundMobile from '../images/bg-shorten-mobile.svg';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signup, currentUser } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState(undefined);
   const navigate = useNavigate();
 
@@ -40,7 +41,9 @@ const Login = () => {
           <button onClick={signupHandler}>Submit</button>
         </form>
 
-        <span>Already have an account?</span>
+        <span>
+          <Link to={'/login'}>Already have an account?</Link>
+        </span>
         <BackgroundStyles>
           <img src={backgroundMobile} />
         </BackgroundStyles>
