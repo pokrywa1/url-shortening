@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import LinksList from './LinksList';
 import Statistics from './Statistics';
@@ -12,10 +12,20 @@ const Main = () => {
     console.log(links);
   };
 
+  useEffect(() => {
+    const localStorageData = JSON.parse(localStorage.getItem('LinkData'));
+    if (!localStorageData) return;
+    console.log(localStorageData);
+    setLinks(localStorageData);
+  }, []);
+
   return (
     <MainStyles>
       <FormAppStyles>
-        <LinkForm getLinkListHandle={getLinkListHandle}></LinkForm>
+        <LinkForm
+          getLinkListHandle={getLinkListHandle}
+          links={links}
+        ></LinkForm>
         <LinksList link={links}></LinksList>
       </FormAppStyles>
       <Statistics></Statistics>

@@ -6,12 +6,33 @@ import formBackgroundDesktop from '../images/bg-shorten-desktop.svg';
 const LinkForm = props => {
   const linkRef = useRef(undefined);
   const [valid, setValid] = useState(true);
+  const [error, setError] = useState('');
 
   const handleSubmit = event => {
     event.preventDefault();
+    setValid(true);
+    setError('');
     const link = linkRef.current.value;
+    const isLinkExist = existLinkInArray(link);
+    if (isLinkExist) {
+      setValid(false);
+      setError('The link just exist');
+      return;
+    }
     getLinkFromApi(link);
     event.target.reset();
+  };
+
+  const existLinkInArray = link => {
+    const isInArray = props.links.some(item => item.link === link);
+    return isInArray;
+  };
+
+  const saveLinksToLocalStorage = (link, shortedLink) => {
+    const localData = localStorage.getItem('LinkData');
+    const parselocalData = localData ? JSON.parse(localData) : [];
+    const linkArray = [...parselocalData, { link, shortedLink }];
+    localStorage.setItem('LinkData', JSON.stringify(linkArray));
   };
 
   const getLinkFromApi = link => {
@@ -23,9 +44,11 @@ const LinkForm = props => {
           shortedLink: data?.result.short_link3,
         };
         props.getLinkListHandle(linkObj);
+        saveLinksToLocalStorage(linkObj.link, linkObj.shortedLink);
         setValid(true);
       })
       .catch(err => {
+        setError('Please add a valid link');
         setValid(false);
       });
   };
@@ -39,7 +62,7 @@ const LinkForm = props => {
           placeholder="Shorten link here"
           ref={linkRef}
         />
-        {!valid && <ErrorStyles>Please add a valid link</ErrorStyles>}
+        {!valid && <ErrorStyles>{error}</ErrorStyles>}
         <button type="submit">Shorten It</button>
 
         {/* <input type="submit" value="Shorten It!" /> */}
